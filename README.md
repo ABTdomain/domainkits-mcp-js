@@ -46,7 +46,7 @@ To use a key, add it to the `env` block:
       "command": "npx",
       "args": ["-y", "@domainkits/mcp"],
       "env": {
-        "DOMAINKITS_API_KEY": "your-api-key"
+        "DOMAINKITS_API_KEY": "dk_xxxxxxxxxxxxxxxx"
       }
     }
   }
