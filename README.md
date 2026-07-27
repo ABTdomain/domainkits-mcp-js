@@ -77,6 +77,8 @@ Each tool ships its own input and output schema, so the client knows what argume
 
 **gTLDs only** for the domain search tools. The index covers generic TLDs — `.com`, `.net`, `.org`, `.info`, `.biz`, `.xyz`, `.online`, `.site`, `.top`, `.club`, `.live`, `.app`, `.dev` and others. Country-code TLDs are not indexed: a query for `.de`, `.io`, `.co` or `.us` returns an empty result set, not an error.
 
+**No PII.** Responses contain no personal data. WHOIS results are limited to registrar, dates, status codes and nameservers; registrant names, emails, addresses and phone numbers are not returned.
+
 Scale, measured on 27 July 2026 by browsing `.com` with no other filter:
 
 | Stage | `.com` domains |
