@@ -29,14 +29,16 @@ async function forward(message: JsonRpcMessage): Promise<void> {
 	const controller = new AbortController();
 	const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
+	const headers: Record<string, string> = {
+		'Content-Type': 'application/json',
+		Accept: 'application/json',
+	};
+	if (API_KEY) headers.Authorization = `Bearer ${API_KEY}`;
+
 	try {
 		const response = await fetch(ENDPOINT, {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				Authorization: `Bearer ${API_KEY}`,
-			},
+			headers,
 			body: JSON.stringify(message),
 			signal: controller.signal,
 		});
@@ -73,9 +75,9 @@ async function forward(message: JsonRpcMessage): Promise<void> {
 function main(): void {
 	if (!API_KEY) {
 		process.stderr.write(
-			'DOMAINKITS_API_KEY is not set. Add it to the env block of your MCP client config.\n',
+			'DOMAINKITS_API_KEY is not set. Running as guest with a low daily quota. ' +
+				'Add a key to the env block of your client config to raise it.\n',
 		);
-		process.exit(1);
 	}
 
 	const rl = createInterface({ input: process.stdin, terminal: false });

@@ -2,13 +2,38 @@
 
 MCP server for the [DomainKits](https://domainkits.com) domain data API.
 
-DomainKits is one API with a shared key across every endpoint. This package exposes all 28 of them to any MCP client — expiring domains, newly registered domains, DNS, WHOIS, reverse nameserver lookups, typosquat detection, TLD trends and more — through a single credential.
+DomainKits is one API with a shared key across every endpoint. This package exposes all 28 of them to any MCP client — expiring domains, newly registered domains, DNS, WHOIS, reverse nameserver lookups, typosquat detection, TLD trends and more.
+
+Works without an API key on a guest quota, so you can try it before signing up.
 
 ## Install
 
 No install step. Point your MCP client at the package and `npx` fetches it on first run.
 
 **Claude Desktop** — add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "domainkits": {
+      "command": "npx",
+      "args": ["-y", "@domainkits/mcp"]
+    }
+  }
+}
+```
+
+**Cursor** — add to `.cursor/mcp.json` in your project, or the global equivalent. Same shape as above.
+
+Any MCP client that speaks stdio works with the same config.
+
+## Credentials
+
+**No key required to start.** Without one you run as a guest: every tool is callable on a small daily quota — 5 domain searches, 5 WHOIS lookups, 5 DNS lookups per day.
+
+Guest access is for trying the server, not working with it. Filters are ignored at that tier, so a search returns unfiltered results across every gTLD, and paging stops after 2 pages of 10. Filters and deeper paging unlock with a key.
+
+To raise the quota, add your key to the `env` block:
 
 ```json
 {
@@ -24,15 +49,9 @@ No install step. Point your MCP client at the package and `npx` fetches it on fi
 }
 ```
 
-**Cursor** — add to `.cursor/mcp.json` in your project, or the global equivalent. Same shape as above.
+Keys come from [domainkits.com](https://domainkits.com/pricing) and work across every DomainKits surface — this MCP server, the REST API, and the n8n node. The key is never written to disk by this package.
 
-Any MCP client that speaks stdio works with the same config.
-
-## Credentials
-
-You need a DomainKits API key. Sign up at [domainkits.com](https://domainkits.com/pricing) — API access requires a Premium or higher plan, and Premium includes a trial period. The same key works for the DomainKits n8n node and the hosted MCP endpoint.
-
-Set it as `DOMAINKITS_API_KEY` in the `env` block of your client config. The key is never written to disk by this package.
+Call the `usage` tool at any time for your current tier and remaining quota on every endpoint.
 
 ## Tools
 
@@ -79,7 +98,29 @@ If your client supports remote MCP over HTTP, you can skip this package and conn
 
 ## Rate limits
 
-Quotas follow your account and vary by plan. Call the `usage` tool for your current limits and remaining allowance on every endpoint. Daily quotas reset at 00:00 UTC, monthly quotas on the 1st.
+Quotas are per tool group and rise with your plan. Guest access needs no key; the paid tiers start at [domainkits.com/pricing](https://domainkits.com/pricing).
+
+Daily quota for the domain search tools (`expired`, `nrds`, `deleted`, `aged`, `active`, `market`, `unregistered_ai`, `domain_changes`):
+
+| Tier | Searches per day | Per minute |
+|---|---|---|
+| Guest (no key) | 5 | 2 |
+| Member | 30 | 10 |
+| Lite | 300 | 20 |
+| Premium | 2,000 | 60 |
+| Platinum | unlimited | unlimited |
+
+Quota is not the only thing that scales. Filters and paging depth do too:
+
+| Tier | Search filters | Max pages |
+|---|---|---|
+| Guest | none | 2 |
+| Member | TLD, keyword position, expiry stage | 10 |
+| Lite | the above, plus character set, length, hold status, sort | 50 |
+| Premium | all filters | 400 |
+| Platinum | all filters | unlimited |
+
+Other tool groups have their own limits — `monitor`, `preferences`, `strategy` and `usage` are unmetered on every tier. Call `usage` for the full picture on your account. Daily quotas reset at 00:00 UTC.
 
 ## Resources
 
