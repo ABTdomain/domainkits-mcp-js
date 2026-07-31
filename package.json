@@ -1,6 +1,6 @@
 {
 	"name": "@domainkits/mcp",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"mcpName": "io.github.ABTdomain/domainkits-mcp",
 	"description": "MCP server for the DomainKits domain data API. Exposes expiring domains, newly registered domains, DNS, WHOIS and more to any MCP client.",
 	"license": "MIT",
