@@ -87,6 +87,8 @@ Search and lookup tools are stateless: nothing you ask is retained. Three tools 
 
 Storage is opt-in. Memory is off by default and must be enabled through `preferences` before `monitor` or `strategy` will accept anything. Stored data is encrypted at rest (AES-256-GCM) in isolated per-user directories, persists across MCP clients under the same account, and can be deleted in full at any time with `preferences` `action: delete` (GDPR Article 17).
 
+Full details: [Privacy Policy](https://domainkits.com/privacy) | [Terms of Service](https://domainkits.com/terms)
+
 ## Coverage
 
 **gTLDs only** for the domain search tools. The index covers generic TLDs: `.com`, `.net`, `.org`, `.info`, `.biz`, `.xyz`, `.online`, `.site`, `.top`, `.club`, `.live`, `.app`, `.dev` and others. Country-code TLDs are not indexed: a query for `.de`, `.io`, `.co` or `.us` returns an empty result set, not an error.
@@ -139,6 +141,8 @@ Other tool groups have their own quotas: `monitor`, `preferences`, `strategy` an
 - [About DomainKits and ABTdomain](https://domainkits.com/about)
 - [ABTdomain](https://abtdomain.com)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
+- [Privacy Policy](https://domainkits.com/privacy)
+- [Terms of Service](https://domainkits.com/terms)
 
 ## License
 
