@@ -2,7 +2,7 @@
 
 MCP server for the [DomainKits](https://domainkits.com) domain data API.
 
-This is the official MCP server for the DomainKits API, published and maintained by the DomainKits team. DomainKits is built and operated by [ABTdomain, a domain intelligence platform](https://abtdomain.com), which also owns the GitHub organisation hosting this repository. The relationship is stated on [domainkits.com/about](https://domainkits.com/about).
+This is the official MCP server for the DomainKits API, published and maintained by the DomainKits team. DomainKits is built and operated by Lyalpha GmbH, with domain data and infrastructure provided by [ABTdomain](https://abtdomain.com), our domain intelligence and data aggregation platform. This repository is hosted under the ABTdomain GitHub organisation. Learn more about the relationship at [domainkits.com/about](https://domainkits.com/about).
 
 DomainKits is one API with a shared key across every endpoint. This package exposes all 28 of them to any MCP client: expiring domains, newly registered domains, DNS, WHOIS, reverse nameserver lookups, typosquat detection, TLD trends and more.
 
