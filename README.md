@@ -75,6 +75,18 @@ Call the `usage` tool at any time for your current tier and remaining quota on e
 
 Each tool ships its own input and output schema, so the client knows what arguments are valid before calling. Run `usage` to see your account's quota for every endpoint.
 
+### Stateful tools and what they store
+
+Search and lookup tools are stateless: nothing you ask is retained. Three tools do store data across sessions, by design:
+
+| Tool | What it stores |
+|---|---|
+| `monitor` | The domains you watch and the results of each check |
+| `preferences` | Your saved preferences and the memory switch |
+| `strategy` | Strategy text you wrote, run timestamps and the most recent result |
+
+Storage is opt-in. Memory is off by default and must be enabled through `preferences` before `monitor` or `strategy` will accept anything. Stored data is encrypted at rest (AES-256-GCM) in isolated per-user directories, persists across MCP clients under the same account, and can be deleted in full at any time with `preferences` `action: delete` (GDPR Article 17).
+
 ## Coverage
 
 **gTLDs only** for the domain search tools. The index covers generic TLDs: `.com`, `.net`, `.org`, `.info`, `.biz`, `.xyz`, `.online`, `.site`, `.top`, `.club`, `.live`, `.app`, `.dev` and others. Country-code TLDs are not indexed: a query for `.de`, `.io`, `.co` or `.us` returns an empty result set, not an error.
