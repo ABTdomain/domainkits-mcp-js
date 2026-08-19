@@ -61,11 +61,11 @@ Call the `usage` tool at any time for your current tier and remaining quota on e
 
 ## Tools
 
-28 tools, grouped by what they answer:
+29 tools, grouped by what they answer:
 
 | Group | Tools |
 |---|---|
-| Domain lifecycle | `expired`, `deleted`, `nrds`, `aged`, `active` |
+| Domain lifecycle | `expired`, `deleted`, `nrds`, `nrds_live`, `aged`, `active` |
 | Availability | `available`, `bulk_available`, `bulk_tld`, `tld_check` |
 | Records | `dns`, `whois`, `ns_reverse`, `domain_changes` |
 | Market | `market`, `market_price`, `price` |
@@ -120,7 +120,7 @@ If your client supports remote MCP over HTTP, you can skip this package and conn
 
 ## Rate limits
 
-Three things scale with your tier: how often you can ask, how precisely you can ask, and how deep you can read. Figures below are for the domain search tools (`expired`, `nrds`, `deleted`, `aged`, `active`, `market`, `unregistered_ai`, `domain_changes`).
+Three things scale with your tier: how often you can ask, how precisely you can ask, and how deep you can read. Figures below are for the domain search tools (`expired`, `nrds`, `nrds_live`, `deleted`, `aged`, `active`, `market`, `unregistered_ai`, `domain_changes`).
 
 | Tier | Searches/day | Per min | Pages | Filters |
 |---|---|---|---|---|
