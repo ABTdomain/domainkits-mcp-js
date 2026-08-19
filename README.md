@@ -118,21 +118,9 @@ If your client supports remote MCP over HTTP, you can skip this package and conn
 | `DOMAINKITS_API_KEY` | (none) | Optional. Without it you run as a guest. |
 | `DOMAINKITS_MCP_URL` | `https://api.domainkits.com/v1/mcp` | Override the endpoint. |
 
-## Rate limits
+## Access
 
-Three things scale with your tier: how often you can ask, how precisely you can ask, and how deep you can read. Figures below are for the domain search tools (`expired`, `nrds`, `nrds_live`, `deleted`, `aged`, `active`, `market`, `unregistered_ai`, `domain_changes`).
-
-| Tier | Searches/day | Per min | Pages | Filters |
-|---|---|---|---|---|
-| Guest (no key) | 5 | 2 | 2 | none |
-| Member (free) | 30 | 10 | 10 | TLD, keyword position, expiry stage |
-| Lite | 300 | 20 | 50 | the above, plus character set, length, registry hold, sort |
-| Premium | 2,000 | 60 | 400 | all |
-| Platinum | unlimited | unlimited | unlimited | all |
-
-Pages are 10 results each, so Guest sees at most 20 matches per search and Premium 4,000.
-
-Other tool groups have their own quotas: `monitor`, `preferences`, `strategy` and `usage` are unmetered on every tier. Call `usage` for the full picture on your account. Daily quotas reset at 00:00 UTC.
+Works without an API key on a guest quota. A free account raises it; paid tiers raise it further and unlock the full filter set and deeper paging. Current per-tier limits are listed at [domainkits.com/pricing](https://domainkits.com/pricing); the `usage` tool reports the live quota for your own account. Daily quotas reset at 00:00 UTC.
 
 ## Resources
 
