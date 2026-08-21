@@ -4,7 +4,7 @@ MCP server for the [DomainKits](https://domainkits.com) domain data API.
 
 This is the official MCP server for the DomainKits API, published and maintained by the DomainKits team. DomainKits is built and operated by Lyalpha GmbH, with domain data and infrastructure provided by [ABTdomain](https://abtdomain.com), our domain intelligence and data aggregation platform. This repository is hosted under the ABTdomain GitHub organisation. Learn more about the relationship at [domainkits.com/about](https://domainkits.com/about).
 
-DomainKits is one API with a shared key across every endpoint. This package exposes all 28 of them to any MCP client: expiring domains, newly registered domains, DNS, WHOIS, reverse nameserver lookups, typosquat detection, TLD trends and more.
+DomainKits is one API with a shared key across every surface. This package exposes the full DomainKits tool set to any MCP client: expiring domains, newly registered domains, DNS, WHOIS, reverse nameserver lookups, typosquat detection, TLD trends and more.
 
 Works without an API key on a guest quota, so you can try it before signing up.
 
@@ -31,13 +31,7 @@ Any MCP client that speaks stdio works with the same config.
 
 ## Credentials
 
-**No key required to start.** Without one you run as a guest: every tool is callable, capped at 5 domain searches, 5 WHOIS lookups and 5 DNS lookups per day. Filters are ignored at that tier and paging stops after 2 pages of 10, so a search returns the newest unfiltered results across every gTLD. It is enough to see what the data looks like.
-
-**Registering is free and changes what you can ask.** A free Member account turns on the filters that make a search a question rather than a sample (restrict to a gTLD, choose where the keyword sits in the name, pick the expiry stage) and raises the daily search quota from 5 to 30, with 10 pages instead of 2.
-
-**Paid tiers widen the same axes.** Lite ($24.99/mo) adds character-set, length, registry-hold and sort filters, 300 searches a day and 50 pages. Premium ($99.99/mo) unlocks every filter the API supports, 2,000 searches a day and 400 pages. Platinum removes the daily and paging caps.
-
-Current pricing: [domainkits.com/pricing](https://domainkits.com/pricing).
+**No key required to start.** Without one you run on a guest quota, enough to see what the data looks like. A free account raises the limits and unlocks filters; paid tiers raise them further. Current tiers and limits: [domainkits.com/pricing](https://domainkits.com/pricing). The `usage` tool reports the live quota for your own account at any time.
 
 To use a key, add it to the `env` block:
 
@@ -57,23 +51,44 @@ To use a key, add it to the `env` block:
 
 Keys come from [domainkits.com](https://domainkits.com/pricing) and work across every DomainKits surface: this MCP server, the REST API, and the n8n node. The key is never written to disk by this package.
 
-Call the `usage` tool at any time for your current tier and remaining quota on every endpoint.
-
 ## Tools
 
-29 tools, grouped by what they answer:
-
-| Group | Tools |
+| Tool | What it does |
 |---|---|
-| Domain lifecycle | `expired`, `deleted`, `nrds`, `nrds_live`, `aged`, `active` |
-| Availability | `available`, `bulk_available`, `bulk_tld`, `tld_check` |
-| Records | `dns`, `whois`, `ns_reverse`, `domain_changes` |
-| Market | `market`, `market_price`, `price` |
-| Research | `keyword_data`, `keywords_trends`, `tld_rank`, `tld_trends`, `backlink_summary`, `unregistered_ai` |
-| Risk | `safety`, `typosquat` |
-| Account | `usage`, `monitor`, `preferences`, `strategy` |
+| `nrds` | Search newly registered domains from the last 60 days, or browse one gTLD |
+| `nrds_live` | Search the live feed of domains registered within the last three days |
+| `expired` | Search domains in the deletion cycle: expired, in redemption, or pending delete |
+| `deleted` | Search dropped domains that are open for registration again |
+| `aged` | Search registered domains with 5 to 20+ years of history |
+| `active` | Search currently registered gTLD domains |
+| `market` | Search registered domains carrying marketplace listing data |
+| `available` | Confirm one domain's registrability and price |
+| `bulk_available` | Registration status for up to 50 domains in one call |
+| `bulk_tld` | Check one keyword across many TLDs: taken, available or for sale |
+| `tld_check` | Check how a prefix is registered across the core TLDs |
+| `whois` | WHOIS/RDAP registration data: registrar, dates, status, nameservers |
+| `dns` | Resolve a domain's DNS records |
+| `ns_reverse` | List the gTLD domains hosted on one nameserver |
+| `domain_changes` | Registration and status changes to premium .com names over the last 7 days |
+| `ip_lookup` | Resolve an IP or hostname to its network operator and approximate location |
+| `registrar` | Look up ICANN-accredited registrars by name, alias or IANA ID |
+| `epp_status` | Explain a domain EPP status code and what the holder can do about it |
+| `market_price` | Aftermarket listing status and price for a domain |
+| `price` | Standard registration and renewal price for a TLD |
+| `keyword_data` | Search volume, CPC and competition for a keyword |
+| `keywords_trends` | Keyword registration boards: hot, emerging and prefix activity |
+| `tld_rank` | Rank TLDs by registration volume over a chosen period |
+| `tld_trends` | Registration trend data for one TLD, or a comparison of several |
+| `backlink_summary` | A domain's backlink profile and spam score |
+| `unregistered_ai` | Unregistered short .ai domains by letter pattern |
+| `safety` | Google Safe Browsing status for a domain |
+| `typosquat` | Generate typosquat variants of a domain and check which are registered |
+| `usage` | Your account's current tier, usage and rate limits |
+| `monitor` | Manage domain monitoring tasks across WHOIS, DNS and page content |
+| `preferences` | Manage saved preferences and the memory switch |
+| `strategy` | Store your own strategy text and its run results |
 
-Each tool ships its own input and output schema, so the client knows what arguments are valid before calling. Run `usage` to see your account's quota for every endpoint.
+Each tool ships its own input and output schema, so the client knows what arguments are valid before calling. The tool list is served live by the endpoint, so your client always sees the current set.
 
 ### Stateful tools and what they store
 
@@ -85,25 +100,11 @@ Search and lookup tools are stateless: nothing you ask is retained. Three tools 
 | `preferences` | Your saved preferences and the memory switch |
 | `strategy` | Strategy text you wrote, run timestamps and the most recent result |
 
-Storage is opt-in. Memory is off by default and must be enabled through `preferences` before `monitor` or `strategy` will accept anything. Stored data is encrypted at rest (AES-256-GCM) in isolated per-user directories, persists across MCP clients under the same account, and can be deleted in full at any time with `preferences` `action: delete` (GDPR Article 17).
+Storage is opt-in. Memory is off by default and must be enabled through `preferences` before `monitor` or `strategy` will accept anything. Stored data is encrypted at rest in isolated per-user directories, persists across MCP clients under the same account, and can be deleted in full at any time with `preferences` `action: delete`.
 
 Full details: [Privacy Policy](https://domainkits.com/privacy) | [Terms of Service](https://domainkits.com/terms)
 
-## Coverage
-
-**gTLDs only** for the domain search tools. The index covers generic TLDs: `.com`, `.net`, `.org`, `.info`, `.biz`, `.xyz`, `.online`, `.site`, `.top`, `.club`, `.live`, `.app`, `.dev` and others. Country-code TLDs are not indexed: a query for `.de`, `.io`, `.co` or `.us` returns an empty result set, not an error.
-
-**No PII.** Responses contain no personal data. WHOIS results are limited to registrar, dates, status codes and nameservers; registrant names, emails, addresses and phone numbers are not returned.
-
-Scale, measured on 27 July 2026 by browsing `.com` with no other filter:
-
-| Stage | `.com` domains |
-|---|---|
-| Expired | 1,597,469 |
-| Redemption | 2,754,494 |
-| Pending delete | 495,650 |
-
-Counts move daily as names progress through the lifecycle and drop.
+**No PII.** Responses contain no registrant personal data.
 
 ## What this package does
 
@@ -117,10 +118,6 @@ If your client supports remote MCP over HTTP, you can skip this package and conn
 |---|---|---|
 | `DOMAINKITS_API_KEY` | (none) | Optional. Without it you run as a guest. |
 | `DOMAINKITS_MCP_URL` | `https://api.domainkits.com/v1/mcp` | Override the endpoint. |
-
-## Access
-
-Works without an API key on a guest quota. A free account raises it; paid tiers raise it further and unlock the full filter set and deeper paging. Current per-tier limits are listed at [domainkits.com/pricing](https://domainkits.com/pricing); the `usage` tool reports the live quota for your own account. Daily quotas reset at 00:00 UTC.
 
 ## Resources
 
