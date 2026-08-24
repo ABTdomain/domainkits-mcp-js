@@ -104,7 +104,7 @@ Storage is opt-in. Memory is off by default and must be enabled through `prefere
 
 Full details: [Privacy Policy](https://domainkits.com/privacy) | [Terms of Service](https://domainkits.com/terms)
 
-**No PII.** Responses contain no registrant personal data.
+No tool returns domain registrant personal data. `registrar` returns ICANN-published registrar business contacts.
 
 ## What this package does
 
