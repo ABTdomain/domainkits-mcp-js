@@ -81,7 +81,6 @@ Keys come from [domainkits.com](https://domainkits.com/pricing) and work across 
 | `tld_trends` | Registration trend data for one TLD, or a comparison of several |
 | `backlink_summary` | A domain's backlink profile and spam score |
 | `unregistered_ai` | Unregistered short .ai domains by letter pattern |
-| `safety` | Google Safe Browsing status for a domain |
 | `typosquat` | Generate typosquat variants of a domain and check which are registered |
 | `usage` | Your account's current tier, usage and rate limits |
 | `monitor` | Manage domain monitoring tasks across WHOIS, DNS and page content |
