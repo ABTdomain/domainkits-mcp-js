@@ -56,7 +56,7 @@ Keys come from [domainkits.com](https://domainkits.com/pricing) and work across 
 | Tool | What it does |
 |---|---|
 | `nrds` | Search newly registered domains from the last 60 days, or browse one gTLD |
-| `nrds_live` | Search the live feed of domains registered within the last three days |
+| `nrds_live` | Search the live feed of newly registered domains; reaches back up to 60 days, best for the last three days |
 | `expired` | Search domains in the deletion cycle: expired, in redemption, or pending delete |
 | `deleted` | Search dropped domains, as of the latest data update (confirm availability before registering) |
 | `aged` | Search registered domains with 5 to 20+ years of history |
