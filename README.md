@@ -58,13 +58,13 @@ Keys come from [domainkits.com](https://domainkits.com/pricing) and work across 
 | `nrds` | Search newly registered domains from the last 60 days, or browse one gTLD |
 | `nrds_live` | Search the live feed of domains registered within the last three days |
 | `expired` | Search domains in the deletion cycle: expired, in redemption, or pending delete |
-| `deleted` | Search dropped domains that are open for registration again |
+| `deleted` | Search dropped domains, as of the latest data update (confirm availability before registering) |
 | `aged` | Search registered domains with 5 to 20+ years of history |
 | `active` | Search currently registered gTLD domains |
 | `market` | Search registered domains carrying marketplace listing data |
 | `available` | Confirm one domain's registrability and price |
 | `bulk_available` | Registration status for up to 50 domains in one call |
-| `bulk_tld` | Check one keyword across many TLDs: taken, available or for sale |
+| `bulk_tld` | How many TLDs each of up to 50 keywords is registered in (counts only) |
 | `tld_check` | Check how a prefix is registered across the core TLDs |
 | `whois` | WHOIS/RDAP registration data: registrar, dates, status, nameservers |
 | `dns` | Resolve a domain's DNS records |
