@@ -127,6 +127,10 @@ If your client supports remote MCP over HTTP, you can skip this package and conn
 - [Privacy Policy](https://domainkits.com/privacy)
 - [Terms of Service](https://domainkits.com/terms)
 
+## Video
+
+[![Feed Your AI Domain Data with DomainKits MCP](https://img.youtube.com/vi/zHJOUzDx6eM/maxresdefault.jpg)](https://www.youtube.com/watch?v=zHJOUzDx6eM)
+
 ## License
 
 [MIT](LICENSE.md)
