@@ -6,7 +6,7 @@ It is a stdio transport for the hosted DomainKits MCP endpoint, written in TypeS
 
 ## What it does
 
-It gives your most advanced AI better domain data, so it can research domains correctly. Your AI can analyze one domain, or a whole group of domains, from several technical angles:
+It gives your most advanced AI better domain data, so it can research domains in depth. Your AI can analyze one domain, or a group of domains, from several technical angles:
 
 - **Lifecycle**: [newly registered domains](https://github.com/ABTdomain/newly-registered-domains), [expired domains](https://github.com/ABTdomain/expired-domains), and deleted, aged, active and for-sale domains
 - **Registration**: WHOIS data, the registrar, and what each EPP status code means
@@ -17,10 +17,7 @@ It gives your most advanced AI better domain data, so it can research domains co
 - **Keywords and trends**: search volume for a keyword, and keyword and TLD registration trends
 - **Changes**: monitoring of WHOIS, DNS and page content
 
-<p align="center">
-<a href="https://www.youtube.com/watch?v=zHJOUzDx6eM"><img src="https://img.youtube.com/vi/zHJOUzDx6eM/maxresdefault.jpg" alt="Video: Feed your AI domain data with DomainKits MCP" width="640"></a><br>
-<a href="https://www.youtube.com/watch?v=zHJOUzDx6eM">▶ Watch on YouTube: Feed Your AI Domain Data with DomainKits MCP</a>
-</p>
+▶ [See how it is used](#use-it-for)
 
 ## Tools
 
@@ -79,7 +76,7 @@ No install step. Point your MCP client at the package and `npx` fetches it on fi
 }
 ```
 
-Any MCP client that speaks stdio works with the same config.
+MCP clients that speak stdio use the same config.
 
 The `env` block holds your API key and is optional. The same key works for this MCP server, the REST API and the n8n node. This package does not write the key to disk.
 
@@ -87,7 +84,7 @@ Sign up at [domainkits.com](https://domainkits.com) to get a key and use it for 
 
 ## Privacy
 
-Search and lookup tools are stateless: nothing you ask is retained. Three tools do store data across sessions, by design:
+Search and lookup tools are stateless: your queries are not retained. Three tools do store data across sessions, by design:
 
 | Tool | What it stores |
 |---|---|
@@ -95,13 +92,18 @@ Search and lookup tools are stateless: nothing you ask is retained. Three tools 
 | `preferences` | Your saved preferences and the memory switch |
 | `strategy` | Strategy text you wrote, run timestamps and the most recent result |
 
-Storage is opt-in. Memory is off by default and must be enabled through `preferences` before `monitor` or `strategy` will accept anything. Stored data is encrypted at rest in isolated per-user directories, persists across MCP clients under the same account, and can be deleted in full at any time with `preferences` `action: delete`.
+Storage is opt-in. Memory is off by default and must be enabled through `preferences` before `monitor` or `strategy` will store data. Stored data is encrypted at rest in isolated per-user directories, persists across MCP clients under the same account, and can be deleted with `preferences` `action: delete`.
 
 Full details: [Privacy Policy](https://domainkits.com/privacy) | [Terms of Service](https://domainkits.com/terms)
 
 No tool returns domain registrant personal data. `registrar` returns ICANN-published registrar business contacts.
 
 ## Use it for
+
+<p align="center">
+<a href="https://www.youtube.com/watch?v=zHJOUzDx6eM"><img src="https://img.youtube.com/vi/zHJOUzDx6eM/maxresdefault.jpg" alt="Video: Feed your AI domain data with DomainKits MCP" width="640"></a><br>
+<a href="https://www.youtube.com/watch?v=zHJOUzDx6eM">▶ Watch on YouTube: Feed Your AI Domain Data with DomainKits MCP</a>
+</p>
 
 ### [Newly registered domains](https://github.com/ABTdomain/newly-registered-domains)
 
